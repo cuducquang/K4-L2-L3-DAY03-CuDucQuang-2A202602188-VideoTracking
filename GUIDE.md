@@ -332,6 +332,68 @@ Nếu nghi ngờ reference, ghi frame–ID–rule–evidence để Lab Coach đ�
 
 ---
 
+### Cấu hình và output thực tế cho fork `CuDucQuang-2A202602188`
+
+Phần này ghi **trạng thái của bản làm cá nhân tại 15/09/2026**, không thay thế
+checkpoint ở trên và không phải metric/model output đã chạy. Repo Colab cần clone:
+
+```text
+https://github.com/cuducquang/K4-L2-L3-DAY03-CuDucQuang-2A202602188-VideoTracking.git
+```
+
+Notebook đã điền URL này trong `REPO_URL`; sau cell clone, `ROOT` phải là
+`/content/Day3-Lab`. Hai clip trong `ROOT/data/clips/` lần lượt là `clip_01`
+(190 JPEG, 960×540, 12.5 fps) và `clip_02` (60 JPEG, 960×540, 12.5 fps).
+
+| File / output | Trạng thái hiện tại | Bước tạo hoặc dùng |
+| --- | --- | --- |
+| `annotations/clip_01/gt.txt` | Có từ CVAT task #12, MOT 1.1; 595 bbox, 8 ID; validator 0 lỗi, 1 cảnh báo SUV đứng yên | Bản core để khóa pre-gold và upload/push cho Colab |
+| `annotations/clip_02/gt.txt` | Có từ CVAT task #11, MOT 1.1; 239 bbox, 6 ID; validator 0 lỗi, 2 cảnh báo xe đứng yên | Warm-up; không phải input của hai tracker core |
+| `outputs/eval_warmup_clip_02.json` | Có: IDF1 0.974, MOTA 0.947, MOTP 0.842; FP 12, FN 0, IDSW 0 | Chỉ là tự chấm warm-up với reference có sẵn; không chứng minh core đạt |
+| `reports/review_partner.md`, `GUIDELINE_MINI.md` | Chưa hoàn thành bằng finding/ca thật | Người học và reviewer ghi frame–ID–rule–fix–closure; không điền giả |
+| `evidence/pre-gold/clip_01/gt.txt`, `manifest.json` | Chưa có | Sau QC/peer, chạy `tools/lock_pre_gold.py` và chờ Coach xác nhận hash |
+| `gold/clip_01/gt.txt` | Chưa được mở/đặt vào đúng path | Chỉ xử lý `gold.zip` sau pre-gold lock và xác nhận hash; không commit gold/ZIP |
+| `outputs/eval_pre_gold.json`, `outputs/eval_vs_gold.json` | Chưa có | Chấm snapshot trước và nhãn cuối sau rework với gold, qua cổng annotation |
+| `outputs/model_bytetrack_clip_01.txt`, `outputs/model_reid_clip_01.txt`, `outputs/model_run_config.json` | Chưa có | Cell tracking của notebook tạo cả ba file |
+| `outputs/eval_bytetrack_vs_gold.json`, `outputs/eval_reid_vs_gold.json`, `outputs/eval_reid_vs_me.json` | Chưa có | Cell evaluation của notebook tạo; hai file `vs_gold` chỉ có khi `HAS_GOLD=True` |
+| `reports/REPORT.md` | Chưa có | Điền từ `reports/REPORT_TEMPLATE.md` bằng metric/frame evidence thật sau khi chạy |
+
+Để cell clone trên Colab thấy MOT/JSON, kiểm tra các file này đã được push lên
+fork; nếu chưa, upload các `gt.txt`/manifest vào đúng path qua Files của Colab.
+
+`gold/gold.zip` vừa được pull từ nhánh fork nhưng hiện **đang được Git theo dõi**.
+Điều này trái yêu cầu nộp bài ở [SUBMISSION.md](SUBMISSION.md): không commit gold
+hoặc ZIP. Theo lựa chọn hiện tại của người học, giữ ZIP trên fork để dùng cho
+Colab; **trước khi nộp** phải xử lý việc gold/ZIP đang bị Git theo dõi. Gỡ khỏi
+commit mới chỉ làm sạch cây hiện tại, không xóa nó khỏi lịch sử Git đã public.
+Không mở ZIP hay chấm core với gold trước khi khóa pre-gold và Coach xác nhận hash.
+
+Khi QC/peer, export và pre-gold lock đã xong, đưa hai `gt.txt` và manifest lên
+fork (hoặc upload từng file vào Files của Colab). Colab phải có tối thiểu:
+
+```text
+/content/Day3-Lab/annotations/clip_01/gt.txt
+/content/Day3-Lab/data/clips/clip_01/seqinfo.ini
+/content/Day3-Lab/data/clips/clip_01/img1/000001.jpg ... 000190.jpg
+```
+
+Sau Coach xác nhận hash, upload reference riêng vào đúng
+`/content/Day3-Lab/gold/clip_01/gt.txt`; đừng để ZIP chưa giải nén tại
+`/content/Day3-Lab/gold/gold.zip` rồi kỳ vọng notebook tự đọc. Cell kiểm dữ liệu
+phải in `clip_01: 190 frame`, dòng `nhãn của bạn` và dòng `gold` có số bbox/track
+trước khi muốn chấm cả annotation và model với gold. Nếu `HAS_GOLD=False`, notebook vẫn chạy
+ByteTrack/ReID nhưng không tạo các JSON `vs_gold`.
+
+Chạy tuần tự từ cell clone → cài `ultralytics==8.4.145`, `lap==0.5.13` → kiểm
+dữ liệu → cell hai tracker → các cell evaluation/bảng/chart/worst frames. Cell
+tracker giữ cùng `yolo26n.pt`, `CONF=0.25`, `IOU=0.70`, `IMGSZ=960`,
+`CLASSES=[2,5,7]`; `DEVICE` in từ runtime thực tế (GPU `0` hoặc `cpu`).
+Tải các file MOT/JSON/config từ `/content/Day3-Lab/outputs/` về đúng
+`outputs/` trong repo, rồi kiểm chúng là file có dữ liệu và chạy validator MOT.
+Không chạy stretch (`RUN_EXPERIMENT=False`) trước khi xong core.
+
+---
+
 ## 7. Nộp bài
 
 ```bash
