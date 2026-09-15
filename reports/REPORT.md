@@ -38,16 +38,16 @@ Ca hai người quyết khác nhau: N/A. Luật còn thiếu là ngưỡng nhậ
 
 | Evidence | Giá trị |
 | --- | --- |
-| SHA-256 từ `evidence/pre-gold/clip_01/manifest.json` | Không có — chưa khóa trước khi gold/model xuất hiện |
-| Thời điểm khóa | Không có; không tạo snapshot hồi tố |
-| Số row / frame / track trước khi mở reference | Không xác minh được bằng snapshot độc lập |
+| SHA-256 từ `evidence/pre-gold/clip_01/manifest.json` | `cb569880e9745894d662f65d177ba1bee553e4b876c66b1ebc58f674f8ccf686` |
+| Thời điểm khóa | Export CVAT ZIP lúc 04:02:57 UTC **trước gold**; snapshot/manifest audit tạo muộn lúc 09:17:36 UTC |
+| Số row / frame / track trước khi mở reference | 595 row / 190 frame / 8 track; SHA-256 của entry `gt/gt.txt` trong ZIP export trùng snapshot và nhãn hiện tại |
 
 | | HOTA | DetA | AssA | LocA | IDF1 | MOTA | MOTP | FP | FN | IDSW |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Bản pre-gold | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| Bản pre-gold | 0.831 | 0.818 | 0.847 | 0.883 | 0.966 | 0.930 | 0.873 | 31 | 9 | 0 |
 | Sau rework* | 0.831 | 0.818 | 0.847 | 0.883 | 0.966 | 0.930 | 0.873 | 31 | 9 | 0 |
 
-*Đây là **bản nhãn hiện tại sau self-QC**, chấm lần đầu với gold local; không có bằng chứng một vòng rework theo gold hoặc phép so trước/sau. `gold.zip` đã có trên fork trước khi khóa pre-gold, nên checkpoint thứ tự chưa đạt.
+*ZIP export gốc của CVAT có trên máy lúc 04:02:57 UTC, trước `gold.zip` tải lúc 04:38:32 UTC và upload lên fork lúc 04:49:29 UTC; entry nhãn trùng SHA-256 với snapshot. **Khóa hash/Coach xác nhận trước gold không được thực hiện**: manifest chỉ được lập lúc 09:17:36 UTC để audit nguồn cũ. Bản hiện tại không có rework theo gold, vì vậy hai hàng metric bằng nhau.
 
 Qua cổng (`IDF1 >= 0.80`, `MOTA >= 0.75`, `MOTP >= 0.70`): **có** cho bản nhãn hiện tại.
 
@@ -107,7 +107,7 @@ Trong `GUIDELINE_MINI.md`, chốt ngưỡng bắt đầu/kết thúc track cho x
 
 - [x] `annotations/clip_01/gt.txt`
 - [x] `annotations/clip_02/gt.txt`
-- [ ] `evidence/pre-gold/clip_01/gt.txt` và `manifest.json` — không có snapshot trước gold
+- [x] `evidence/pre-gold/clip_01/gt.txt` và `manifest.json` — source export trước gold, manifest audit lập muộn; chưa đạt formal lock trước gold
 - [x] `GUIDELINE_MINI.md` đã điền
 - [x] `outputs/eval_vs_gold.json`
 - [x] `outputs/model_bytetrack_clip_01.txt`

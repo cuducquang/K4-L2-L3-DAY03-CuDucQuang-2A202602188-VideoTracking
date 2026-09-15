@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "locked_at_utc": "2026-09-15T09:17:36.7210334Z",
+  "source": "annotations/clip_01/gt.txt",
+  "snapshot": "evidence/pre-gold/clip_01/gt.txt",
+  "sha256": "cb569880e9745894d662f65d177ba1bee553e4b876c66b1ebc58f674f8ccf686",
+  "bytes": 32390,
+  "rows": 595,
+  "frames": 190,
+  "track_ids": [1, 2, 3, 4, 5, 6, 7, 8],
+  "git_head_before_lock": "b9fff0a1331aa521be55621e196235e59995e0ce",
+  "provenance": {
+    "source_archive": "task_12_annotations_2026_09_15_04_01_21_mot 1.1.zip",
+    "source_archive_sha256": "342f64a3b32338096d7c5d8f0a7a29e9418bafefeffe72f123e0736bd88ea391",
+    "source_archive_entry": "gt/gt.txt",
+    "source_archive_entry_sha256": "cb569880e9745894d662f65d177ba1bee553e4b876c66b1ebc58f674f8ccf686",
+    "source_archive_created_at_utc": "2026-09-15T04:02:57.9183336Z",
+    "gold_zip_download_created_at_utc": "2026-09-15T04:38:32.7224653Z",
+    "gold_fork_upload_commit": "e19db69686487d6fb3c171a8f283d4cdb4210a5c",
+    "gold_fork_upload_at_utc": "2026-09-15T04:49:29Z",
+    "archive_retained_locally_not_submitted": true
+  },
+  "sequence_audit": {
+    "export_archive_predates_gold": true,
+    "formal_lock_and_hash_confirmation_before_gold": false,
+    "note": "Theo metadata local, ZIP export CVAT có trước gold và entry MOT trùng SHA-256 với snapshot. Manifest/snapshot được lập trong đợt audit muộn; không giả lập thời điểm khóa hoặc xác nhận hash trước gold."
+  }
+}

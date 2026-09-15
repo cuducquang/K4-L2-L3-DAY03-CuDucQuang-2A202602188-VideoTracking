@@ -353,22 +353,23 @@ phải output đã chấm gold trong runtime Colab.
 | `annotations/clip_01/gt.txt` | CVAT task #12, 595 bbox/8 ID; validator 0 lỗi, 1 cảnh báo xe đứng yên |
 | `annotations/clip_02/gt.txt`, `outputs/eval_warmup_clip_02.json` | CVAT task #11, 239 bbox/6 ID; warm-up IDF1 0.974, MOTA 0.947, MOTP 0.842 |
 | `GUIDELINE_MINI.md`, `reports/review_partner.md` | Đã ghi ca frame–ID và 2 self-QC finding; peer N/A vì làm cá nhân |
-| `evidence/pre-gold/clip_01/gt.txt`, `manifest.json`, `outputs/eval_pre_gold.json` | **Không có**: gold ZIP đã xuất hiện trước lock; không dựng snapshot/hash hồi tố |
+| `evidence/pre-gold/clip_01/gt.txt`, `manifest.json`, `outputs/eval_pre_gold.json` | Có: nhãn/ZIP CVAT export lúc 04:02:57 UTC trước gold, cùng SHA-256 với snapshot; metric IDF1 0.966/MOTA 0.930/MOTP 0.873. Manifest audit lập **muộn** lúc 09:17:36 UTC, không phải formal lock/Coach xác nhận trước gold |
 | `gold/clip_01/gt.txt` | Chỉ có local, giải từ `gold/gold.zip` có entry `gold/clip01/gt.txt`; không commit reference |
 | `outputs/eval_vs_gold.json` | Chấm local nhãn hiện tại vs gold: IDF1 0.966, MOTA 0.930, MOTP 0.873; qua gate |
 | `outputs/model_bytetrack_clip_01.txt`, `outputs/model_reid_clip_01.txt`, `outputs/model_run_config.json` | Người học tải từ Colab GPU; ByteTrack 607 bbox/16 track, ReID 638 bbox/16 track; cả hai validator 0 lỗi |
 | `outputs/eval_bytetrack_vs_gold.json`, `outputs/eval_reid_vs_gold.json` | Chấm **local** MOT Colab vs gold: IDF1 0.875/0.900; MOTA 0.749/0.792; IDSW 2/2 |
 | `outputs/eval_reid_vs_me.json` | Người học tải từ Colab, đối chiếu local trùng metric/diagnostic: IDF1 0.891, MOTA 0.775, IDSW 1 |
-| `reports/REPORT.md` | Đã điền theo template; ghi rõ peer/pre-gold thiếu evidence thay vì giả lập |
+| `reports/REPORT.md` | Đã điền theo template; ghi rõ nguồn export trước gold, manifest muộn và peer N/A |
 
 Config thực tế từ Colab: Python 3.13.15, `ultralytics==8.4.145`,
 `torch==2.11.0+cu128`, `lap==0.5.13`, `yolo26n.pt`, `conf=0.25`, `iou=0.70`,
 `imgsz=960`, classes `[2,5,7]`, device GPU `0`, `persist=True`.
 
-Trước khi nộp, phải gỡ `gold/gold.zip` khỏi **Git tree** nhưng giữ bản local để
+`gold/gold.zip` đã được gỡ khỏi **Git tree** hiện tại nhưng giữ bản local để
 người học kiểm lại. Gỡ bằng commit mới không xóa ZIP đã public ở lịch sử cũ;
-không force-push/rewrite lịch sử theo [RULES.md](RULES.md). Repo vẫn không có
-snapshot pre-gold hoặc peer review thật, và report nêu rõ hai thiếu sót này.
+không force-push/rewrite lịch sử theo [RULES.md](RULES.md). ZIP export trước
+gold cung cấp nguồn cho snapshot, nhưng formal lock/hash Coach xác nhận trước
+gold không có; peer review thật cũng không có. Report nêu rõ các giới hạn này.
 
 ---
 
