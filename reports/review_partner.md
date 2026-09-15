@@ -2,7 +2,7 @@
 
 | Trường | Giá trị |
 | --- | --- |
-| Author | Cư Đức Quang (2A202602188) |
+| Author | Cù Đức Quang (2A202602188) |
 | Reviewer | Không có — bài làm cá nhân; không giả lập reviewer |
 | Pair ID | N/A |
 | CVAT version | Local 2.75.0, task #12 / job #12 |

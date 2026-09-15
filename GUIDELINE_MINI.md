@@ -7,7 +7,7 @@
 > người trong nhóm gán khác nhau, gần như luôn là vì file này chưa nói rõ — chứ
 > không phải vì ai kém.
 
-Nhóm / tên: Cư Đức Quang — làm cá nhân (MSSV 2A202602188)
+Nhóm / tên: Cù Đức Quang — làm cá nhân (MSSV 2A202602188)
 Clip: `clip_01`, `clip_02`
 
 ---

@@ -1,6 +1,6 @@
 # Báo cáo Ngày 3 — Tracking Annotation
 
-Họ tên / nhóm: Cư Đức Quang (2A202602188) — làm cá nhân
+Họ tên / nhóm: Cù Đức Quang (2A202602188) — làm cá nhân
 Ngày: 15/09/2026
 
 ---
